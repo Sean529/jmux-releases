@@ -1,54 +1,54 @@
 # jmux
 
-A native macOS terminal built on [Ghostty](https://ghostty.org), with vertical tabs and a notification panel.
+一个基于 [Ghostty](https://ghostty.org) 的原生 macOS 终端，提供垂直标签页和通知面板。
 
-<!-- TODO: drop a hero screenshot or short GIF here -->
+<!-- TODO: 在这里放一张产品截图或短录屏 -->
 <p align="center">
-  <img src="docs/screenshot.png" alt="jmux screenshot" width="800">
+  <img src="docs/screenshot.png" alt="jmux 截图" width="800">
 </p>
 
-## Features
+## 功能特性
 
-- **Vertical tabs** — fits long tab titles and dozens of sessions without horizontal scrolling.
-- **Notification panel** — per-pane bottom status bar surfaces command-finished, OSC 9/4 progress, and renderer health.
-- **Ghostty under the hood** — same GPU-accelerated renderer, same `~/.config/ghostty/config`.
-- **Multi-workspace + split panes** — Bonsplit-powered drag/drop splits, sidebar workspaces, and undoable tab close.
-- **Lossless remote sessions** — `jmux ssh <host>` ships a remote daemon for clean port-forwarding and a remote workspace bootstrap.
-- **Agent skills** — `jmux skills install` writes bundled skills into Claude Code (`~/.claude/skills/`) and Codex (`$CODEX_HOME/skills/`).
-- **Customizable shortcuts + i18n** — every cmux-owned shortcut is editable in Settings; UI is localized (English + Japanese to date).
-- **Sparkle-based auto-update** — see [Auto-update](#auto-update) below.
+- **垂直标签页** —— 适合放长标题和几十个会话，不用横向滚动。
+- **通知面板** —— 每个 pane 的底部状态栏会显示命令完成提示、OSC 9/4 进度，以及渲染器健康状态。
+- **Ghostty 内核** —— 同样的 GPU 加速渲染，同一份 `~/.config/ghostty/config` 直接复用。
+- **多工作区 + 分屏** —— 基于 Bonsplit 的拖拽分屏、侧边栏工作区，关闭标签页支持撤销。
+- **无损远程会话** —— `jmux ssh <host>` 会自动部署远端 daemon，端口转发干净，远端工作区一键启动。
+- **Agent skills** —— `jmux skills install` 会把内置 skill 安装到 Claude Code (`~/.claude/skills/`) 和 Codex (`$CODEX_HOME/skills/`)。
+- **快捷键自定义 + 多语言** —— jmux 自带的每一个快捷键都能在「设置」里改；界面已本地化（目前支持英文和日文）。
+- **Sparkle 自动更新** —— 详见下方[自动更新](#自动更新)。
 
-## Download
+## 下载
 
-Latest release: <https://github.com/Sean529/jmux-releases/releases/latest>
+最新版本：<https://github.com/Sean529/jmux-releases/releases/latest>
 
-Grab `jmux-v<version>.zip` from the assets, unzip, and drag `jmux.app` to `/Applications`.
+从 Assets 里下载 `jmux-v<版本号>.zip`，解压后把 `jmux.app` 拖到 `/Applications`。
 
-### First launch (Gatekeeper)
+### 首次启动（Gatekeeper）
 
-Builds are ad-hoc signed for local distribution, so macOS Gatekeeper blocks the first launch. Either:
+构建采用 ad-hoc 签名，首次启动会被 macOS Gatekeeper 拦下。任选其一：
 
-- Right-click `jmux.app` → **Open** → confirm in the dialog, **or**
-- Strip the quarantine flag once:
+- 右键 `jmux.app` → **打开** → 在弹窗里确认；或者
+- 用命令去掉一次隔离属性：
   ```bash
   xattr -dr com.apple.quarantine /Applications/jmux.app
   ```
 
-Intel Macs are not covered by the published builds (arm64 only). On an Intel Mac you'd need to build from source with `ARCHS='arm64 x86_64' ONLY_ACTIVE_ARCH=NO`.
+发布构建只包含 arm64（Apple Silicon）。Intel Mac 用户需要自己从源码构建，加上 `ARCHS='arm64 x86_64' ONLY_ACTIVE_ARCH=NO`。
 
-## Auto-update
+## 自动更新
 
-jmux ships with [Sparkle](https://sparkle-project.org) and polls this repo for new versions:
+jmux 内置了 [Sparkle](https://sparkle-project.org)，会自动查询本仓库的更新：
 
-- Appcast URL: `https://github.com/Sean529/jmux-releases/releases/latest/download/appcast.xml`
-- The shipped app verifies the `ed25519` signature on every update before applying it, so a tampered appcast won't be accepted.
+- Appcast 地址：`https://github.com/Sean529/jmux-releases/releases/latest/download/appcast.xml`
+- 应用会在安装每个更新前校验 `ed25519` 签名，被篡改的 appcast 会直接被拒。
 
-Once installed, you don't need to revisit this page — jmux checks on launch and prompts you when an update is available.
+装好之后你就不用再回到这个页面看了——jmux 每次启动会自己检查更新，有新版本会弹提示。
 
-## License
+## 许可证
 
-See [LICENSE](./LICENSE).
+详见 [LICENSE](./LICENSE)。
 
-## Source
+## 源代码
 
-The source repository is private. This repo only hosts the release artifacts (`.zip` + `appcast.xml`) consumed by Sparkle.
+源代码仓库是私有的。本仓库只托管发布产物（`.zip` + `appcast.xml`），供 Sparkle 拉取使用。
