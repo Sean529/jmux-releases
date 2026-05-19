@@ -2,12 +2,9 @@
 
 一个基于 [Ghostty](https://ghostty.org) 的原生 macOS 终端，提供垂直标签页和通知面板。
 
-<!-- TODO: 在 docs/screenshot.png 放一张产品截图或短录屏，然后取消下方注释 -->
-<!--
 <p align="center">
   <img src="docs/screenshot.png" alt="jmux 截图" width="800">
 </p>
--->
 
 ## 功能特性
 
